@@ -40,11 +40,11 @@
           for (; j < bLen; ++j, ++k) c[k] = b[j];
         }
         ```
-
+    
     === "指针实现"
-        
         ```cpp
-        void merge(const int *aBegin, const int *aEnd, const int *bBegin, const int *bEnd, int *c) {
+        void merge(const int *aBegin, const int *aEnd, const int *bBegin,
+                   const int *bEnd, int *c) {
           while (aBegin != aEnd && bBegin != bEnd) {
             if (*bBegin < *aBegin) {
               *c = *bBegin;
@@ -67,9 +67,9 @@
     def merge(a, b):
         i, j = 0, 0
         c = []
-        while(i < len(a) and j < len(b)):
+        while i < len(a) and j < len(b):
             # <!> 先判断 b[j] < a[i]，保证稳定性
-            if(b[j] < a[i]):
+            if b[j] < a[i]:
                 c.append(b[j])
                 j += 1
             else:

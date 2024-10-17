@@ -42,7 +42,7 @@
 
 === "C++"
     ```cpp
-    int n, a[maxn], tmp[maxn << 1];
+    int n, a[MAXN], tmp[MAXN << 1];
     
     int winner(int pos1, int pos2) {
       int u = pos1 >= n ? pos1 : tmp[pos1];
@@ -90,8 +90,9 @@
 === "Python"
     ```python
     n = 0
-    a = [0] * maxn
-    tmp = [0] * maxn * 2
+    a = [0] * MAXN
+    tmp = [0] * MAXN * 2
+    
     
     def winner(pos1, pos2):
         u = pos1 if pos1 >= n else tmp[pos1]
@@ -100,17 +101,20 @@
             return u
         return v
     
-    def creat_tree(value):
+    
+    def creat_tree():
         for i in range(0, n):
-            tmp[n + 1] = a[i]
-        for i in range(2 * n -1, 1, -2):
+            tmp[n + i] = a[i]
+        for i in range(2 * n - 1, 1, -2):
             k = int(i / 2)
             j = i - 1
             tmp[k] = winner(i, j)
-        value = tmp[tmp[i]]
-        tmp[tmp[i]] = INF
+        value = tmp[tmp[1]]
+        tmp[tmp[1]] = INF
+        return value
     
-    def recreat(value):
+    
+    def recreat():
         i = tmp[1]
         while i > 1:
             j = k = int(i / 2)
@@ -122,13 +126,14 @@
             i = k
         value = tmp[tmp[1]]
         tmp[tmp[1]] = INF
+        return value
+    
     
     def tournament_sort():
-        value = 0
-        creat_tree(value)
+        value = creat_tree()
         for i in range(0, n):
             a[i] = value
-            recreat(value)
+            value = recreat()
     ```
 
 ## 外部链接
